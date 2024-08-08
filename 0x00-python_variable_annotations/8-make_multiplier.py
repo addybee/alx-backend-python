@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-""""""
+"""
+Module: module
+
+This module provides a function for creating a multiplier function.
+
+Functions:
+    make_multiplier: Create a function that multiplies a given number
+    by a specified multiplier.
+"""
 from typing import Callable
 
 
