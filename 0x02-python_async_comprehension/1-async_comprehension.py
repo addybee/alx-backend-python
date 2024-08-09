@@ -3,13 +3,13 @@
 This module describe a function that Asynchronously generates a list
 comprehension using values from async_generator.
 """
-import asyncio
+from typing import List
 
 # Importing async_generator from '0-async_generator' module
 async_generator = __import__('0-async_generator').async_generator
 
 
-async def async_comprehension() -> list:
+async def async_comprehension() -> List[float]:
     """
     Asynchronously generates a list comprehension using values from
     async_generator.
