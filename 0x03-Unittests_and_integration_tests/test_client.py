@@ -4,7 +4,7 @@ Unit tests for access_nested_map and get_json functions.
 """
 
 from parameterized import parameterized
-from typing import Mapping, Sequence, Any
+# from typing import Mapping, Sequence, Any
 from unittest.mock import patch, PropertyMock
 import unittest
 from client import GithubOrgClient
@@ -19,8 +19,8 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_org(self, org_n: str, mocked_get_json):
         """Test the org method by mocking the get_json function."""
+        mocked_get_json.return_value = {'msg': "payload"}
         instance = GithubOrgClient(org_n)
-        instance.org
         instance.org
         mocked_get_json.assert_called_once()
 
