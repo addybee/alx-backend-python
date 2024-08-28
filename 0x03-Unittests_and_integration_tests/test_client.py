@@ -17,7 +17,9 @@ class TestGithubOrgClient(unittest.TestCase):
     @parameterized.expand(['google', 'abc'])
     @patch('client.get_json')
     def test_org(self, org_n: str, mocked_get_json: Any) -> None:
-        """Test the org property by mocking the get_json function."""
+        """
+            Test the org property by mocking the get_json function.
+        """
         mocked_get_json.return_value = {'login': org_n}
         instance = GithubOrgClient(org_n)
         self.assertEqual(instance.org, mocked_get_json.return_value)
@@ -35,7 +37,9 @@ class TestGithubOrgClient(unittest.TestCase):
 
     @patch('client.get_json')
     def test_public_repos(self, mocked_get_json: Any) -> None:
-        """Test the public_repos method."""
+        """
+            Test the public_repos method.
+        """
         mocked_get_json.return_value = [
             {'name': 'repo1'},
             {'name': 'repo2'}
@@ -48,7 +52,7 @@ class TestGithubOrgClient(unittest.TestCase):
 
             client = GithubOrgClient("Google")
             repos = client.public_repos()
-            self.assertEqual(repos, ['repo1', 'repo2'])
+            self.assertListEqual(repos, ['repo1', 'repo2'])
             mocked_get_json.assert_called_once()
             mock_public_repos_url.assert_called_once()
 
@@ -91,13 +95,21 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        """Stop the patcher."""
+        """
+            Stop the patcher.
+        """
         cls.patcher.stop()
 
-    def test_public_repos(self):
+    def test_public_repos(self) -> None:
         """Test the public_repos method."""
         client = GithubOrgClient("google")
         repos = client.public_repos()
         self.assertEqual(repos, self.expected_repos)
-        repos = client.public_repos("apache-2.0")
+
+    def test_public_repos_with_license(self) -> None:
+        """
+            test the public_repos with the argument
+        """
+        client = GithubOrgClient("google")
+        repos = client.public_repos(license="apache-2.0")
         self.assertEqual(repos, self.apache2_repos)
