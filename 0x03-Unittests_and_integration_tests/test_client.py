@@ -76,6 +76,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     expected_repos: List[str]
     apache2_repos: List[str]
     patcher: Any
+
     @classmethod
     def setUpClass(cls) -> None:
         """Set up the class-level patch for requests.get."""
@@ -85,7 +86,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         # Define the side_effect function to return the correct payload
         def get_side_effect(url, *args: Any, **kwargs: Any) -> Any:
             mock_response = get_patcher.return_value
-            if  not url.endswith('/repos'):
+            if not url.endswith('/repos'):
                 mock_response.json.return_value = cls.org_payload
             else:
                 mock_response.json.return_value = cls.repos_payload
