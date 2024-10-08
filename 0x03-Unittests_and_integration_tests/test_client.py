@@ -5,7 +5,7 @@ Unit tests for GithubOrgClient class.
 
 from parameterized import parameterized, parameterized_class
 from typing import Dict, List, Any
-from unittest.mock import patch, PropertyMock, Mock
+from unittest.mock import patch, PropertyMock
 import unittest
 from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
